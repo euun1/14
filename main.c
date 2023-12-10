@@ -1,24 +1,31 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
+struct Book {
+    int number;
+    char title[10];
+};
 
-int main(int argc, char *argv[]) {
-    char *pc = NULL;
-    int i = 0;
-    pc = (char*)malloc(27 * sizeof(char)); // 수정: 배열 크기를 27로 변경하여 'a'부터 'z'까지 저장할 수 있도록 함
-    if (pc == NULL) {
+int main(void) { 
+    struct Book *p;
+    p = (struct Book*)malloc(2 * sizeof(struct Book));
+    
+    if (p == NULL) {
         printf("메모리 할당 오류\n");
-        exit(1);
+        return;
     }
-    for (i = 0; i < 26; i++) {
-        pc[i] = 'a' + i;
-    }
-    pc[i] = 0;
-    printf("%s\n", pc);
-    free(pc);
 
+    p->number = 1;
+    strcpy(p->title, "C Programming");
+    
+    (p + 1)->number = 2;
+    strcpy((p + 1)->title, "Electronics");
+
+    free(p);
+    
     system("PAUSE");
     return 0;
 }
